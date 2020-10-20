@@ -1,0 +1,8 @@
+{
+  "name": "ssr_demo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/BigBugaboo/ssr_demo.git",
+  "author": "hejunze <hejunze@guanmai.cn>",
+  "license": "MIT"
+}
