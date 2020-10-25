@@ -1,23 +1,14 @@
-import _ from 'lodash'
-import print from './print'
+import _ from 'lodash';
+ import Print from './print';
 
-function printMe() {
-  console.log('click me')
-}
+  function component() {
+    const element = document.createElement('div');
 
-function component() {
-  let element = document.createElement('div');
-  const btn = document.createElement('button');
+    // lodash 是由当前 script 脚本 import 进来的
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+   element.onclick = Print.bind(null, 'Hello webpack!');
 
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    return element;
+  }
 
-  btn.innerHTML = '点击这里，然后查看 console！';
-  btn.onclick = printMe;
-
-  element.appendChild(btn);
-
-
-  return element;
-}
-
-document.body.appendChild(component());
+  document.body.appendChild(component());

@@ -13,5 +13,5 @@ app.use(webpackDevMiddleware(compiler, {
 
 
 app.listen(3000, function () {
-  console.log('🚀 server open on http://localhost:3000/\n');
+  console.log('🚀 Ready at http://localhost:3000/\n');
 });
