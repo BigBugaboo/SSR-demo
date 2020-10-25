@@ -1,16 +1,20 @@
 const path = require('path');
 const WebpackBar = require('webpackbar');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: '[name].[chunkhash].js',
+    filename: '[name].[chunkhash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
   module: {
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new WebpackBar(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),
@@ -20,12 +24,5 @@ module.exports = {
         removeAttributeQuotes: true
       }
     })
-  ],
-  devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
-    port: 9090,
-    host: '0.0.0.0',
-    overlay: true,
-    // compress: true,
-  }
+  ]
 }
