@@ -1,9 +1,9 @@
 {
-  "name": "ssr_demo",
+  "name": "easy_module",
   "version": "1.0.0",
-  "private": true,
-  "repository": "https://github.com/BigBugaboo/ssr_demo.git",
-  "author": "hejunze <hejunze@guanmai.cn>",
+  "private": false,
+  "repository": "https://github.com/BigBugaboo/easy_module.git",
+  "author": "hejunze <hj497304787@vip.qq.com>",
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "start": "node server.js",
