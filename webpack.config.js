@@ -18,6 +18,9 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"]
   },
+  devServer: {
+    contentBase: './dist',
+  },
   optimization: {
     runtimeChunk: 'single',
     moduleIds: 'deterministic',
