@@ -1,11 +1,15 @@
 const path = require('path');
+const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+const isDevelopment = process.env.NODE_ENV !== 'production';
+
 module.exports = {
-  entry: './src/index.ts',
+  mode: isDevelopment ? 'development' : 'production',
+  entry: './src/index.tsx',
   output: {
     filename: '[name].[chunkhash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -16,7 +20,7 @@ module.exports = {
   },
   optimization: {
     runtimeChunk: 'single',
-    moduleIds: 'hashed',
+    moduleIds: 'deterministic',
     splitChunks: {
       cacheGroups: {
         vendor: {
@@ -31,13 +35,33 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
+        exclude: /node_modules/,
         loader: "ts-loader"
       },
       {
         enforce: "pre",
         test: /\.js$/,
         loader: "source-map-loader"
-      }
+      },
+      {
+        test: /\.less$/i,
+        use: [
+          {
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "less-loader",
+            options: {
+              lessOptions: {
+                strictMath: true,
+              },
+            },
+          },
+        ],
+      },
     ]
   },
   plugins: [
@@ -51,10 +75,11 @@ module.exports = {
       minify: {
         removeAttributeQuotes: true
       }
-    })
+    }),
+    isDevelopment && new webpack.HotModuleReplacementPlugin(),
   ],
-  externals: {
-    "react": "React",
-    "react-dom": "ReactDOM"
-  }
+  // externals: {
+  //   "react": "React",
+  //   "react-dom": "ReactDOM"
+  // }
 }
